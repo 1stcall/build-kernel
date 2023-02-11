@@ -39,3 +39,12 @@ your build.
 ## Config
 
 **\*\*TODO\*\***
+
+## Credits
+**\*\*WIP\*\***
+
+
+Thanks to [ephemeral](https://raspberrypi.stackexchange.com/users/103638/ephemeral) for the head start with [create-debian-rpi-package](create-debian-rpi-package.sh).  (See https://raspberrypi.stackexchange.com/questions/100732/how-to-package-custom-rpi-kernel-into-deb)
+
+Thanks to [RonR](https://forums.raspberrypi.com/memberlist.php?mode=viewprofile&u=186692&sid=b8e7117279301c67cebe9029051f2bc2) for the head start with [build-kernel](build-kernel.sh). (See https://forums.raspberrypi.com/viewtopic.php?t=330358 & https://www.raspberrypi.com/documentation/computers/linux_kernel.html#building-the-kernel-locally)
+

@@ -13,8 +13,8 @@
 
 ARCHITECTURE="aarch64" # RPi3B, test: raspbian buster
 KERNEL=kernel8.img
-PROJECT=/home/carl/dev/build-kernel/
-
+PROJECT="/home/carl/dev/build-kernel"
+SRC="/usr/src/linux"
 
 function CREATE(){
 if [ ! -d "${PROJECT}/package/DEBIAN" ];then
@@ -31,10 +31,10 @@ cd "${PROJECT}/package"
 
 echo "creating embeded files..."
 mkdir -p ./boot/overlays
-cp arch/arm64/boot/dts/*dtb ./boot
-cp arch/arm64/boot/dts/overlays/*.dtb* ./boot/overlays/
-cp arch/arm64/boot/dts/overlays/README ./boot/overlays/
-cp arch/arm64/boot/zImage ./boot/$KERNEL.img
+cp "${SRC}/arch/arm64/boot/dts/*dtb" "./boot"
+cp "${SRC}/arch/arm64/boot/dts/overlays/*.dtb*" "./boot/overlays/"
+cp "${SRC}/arch/arm64/boot/dts/overlays/README" "./boot/overlays/"
+cp "${SRC}/arch/arm64/boot/zImage" "./boot/$KERNEL.img"
 #mkdir -p ./usr/bin/
 #echo "ip a" > ./usr/bin/mytool.sh
 
@@ -82,18 +82,18 @@ chmod 0755 postinst
 
 echo "building debian package ${PACKAGENAME}.deb ..."
 cd ..
-dpkg-deb --build {$PROJECT}package
+dpkg-deb --build "${PROJECT}/package"
 if [ ${?} -eq "0" ];then
-    mv {$PROJECT}package.deb {$PROJECT}${PACKAGENAME}.deb
-    echo "SUCCESS building {$PROJECT}${PACKAGENAME}.deb"
-    echo -e "\nINSTALL\nsudo dpkg -i {$PROJECT}${PACKAGENAME}.deb\n\n"
+    mv "${PROJECT}/package.deb" "${PROJECT}/${PACKAGENAME}.deb"
+    echo "SUCCESS building ${PROJECT}/${PACKAGENAME}.deb"
+    echo -e "\nINSTALL\nsudo dpkg -i ${PROJECT}/${PACKAGENAME}.deb\n\n"
 fi
 }
 
 function CLEAN(){
-    rm -R {$PROJECT}package
-    rm -R {$PROJECT}${PACKAGENAME}.deb
-    dpkg --purge ${PACKAGENAME}
+    rm -R "${PROJECT}/package"
+    rm -R "${PROJECT}/${PACKAGENAME}.deb"
+    dpkg --purge "${PACKAGENAME}"
 }
 
 
